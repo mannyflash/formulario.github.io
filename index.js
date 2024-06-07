@@ -4,12 +4,12 @@ const path = require('path');
 const url = require('url');
 const sql = require('mssql');
 
-// Configuración de conexión a SQL Server
+// Configuración de conexión a SQL Server usando variables de entorno
 const config = {
-    user: 'sa',
-    password: 'HALOsun123',
-    server: 'LAPTOP-DEL-INGE\\MANNY',
-    database: 'ITSPP',
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    server: process.env.DB_SERVER,
+    database: process.env.DB_DATABASE,
     options: {
         enableArithAbort: true,
         encrypt: true,
@@ -76,6 +76,6 @@ http.createServer((req, res) => {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
         res.end('404 Not Found');
     }
-}).listen(3000, '0.0.0.0', () => {
-    console.log('Servidor iniciado en http://192.168.0.12:3000/');
+}).listen(3000, () => {
+    console.log('Servidor iniciado en http://localhost:3000/');
 });
